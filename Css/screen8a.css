@@ -1,0 +1,98 @@
+/* ===== SCREEN 8A — Yes ===== */
+#screen8a {
+  --pale-cream: #FFFBF2;
+  --warm-gold: #FFD29D;
+  --amber-glow: #FFAE73;
+  --deep-golden: #F2A952;
+  --text-primary: #5A3A28;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #E8A068;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1800px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+#screen8a .sunrise-sky {
+  position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+  background: linear-gradient(180deg, #FFF8ED 0%, #FFE8CE 35%, #F3BF90 70%, #E8A068 100%);
+  z-index: 1;
+}
+
+#screen8a .sun-glow {
+  position: absolute; bottom: -20%; left: 50%; transform: translateX(-50%);
+  width: 100vw; height: 80vh;
+  background: radial-gradient(ellipse at bottom, rgba(255, 235, 190, 0.8) 0%, rgba(255, 200, 140, 0.3) 60%, transparent 80%);
+  opacity: 0.5; transition: opacity 2.5s ease; pointer-events: none;
+}
+#screen8a .sun-glow.brighten { opacity: 1; }
+
+#screen8a #s8a-particles-canvas { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+
+#screen8a .book-viewport {
+  position: relative; width: min(90%, 620px); height: 80vh; z-index: 10;
+  display: flex; justify-content: center; align-items: center; transform-style: preserve-3d;
+}
+
+#screen8a .page {
+  position: absolute; width: 100%; height: 100%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  backface-visibility: hidden; transform-origin: left center;
+  transition: transform 2.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 2.2s ease;
+}
+
+#screen8a .page-1 { z-index: 2; transform: rotateY(0deg); }
+#screen8a .page-1.turn-page { transform: rotateY(-180deg); opacity: 0; }
+
+#screen8a .page-2 { z-index: 1; opacity: 0; transform: rotateY(90deg); }
+#screen8a .page-2.show-page { opacity: 1; transform: rotateY(0deg); }
+
+#screen8a .page-content { width: 100%; text-align: center; padding: 20px; }
+
+#screen8a .text-block {
+  opacity: 0; filter: blur(10px); transform: translateY(10px);
+  transition: opacity 1.5s ease, filter 1.5s ease, transform 1.5s ease;
+}
+#screen8a .text-block.show { opacity: 1; filter: blur(0px); transform: translateY(0); }
+#screen8a .text-block.fade-out { opacity: 0; filter: blur(12px); transform: translateY(-10px); }
+
+#screen8a .line {
+  font-size: 1.85rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 8px; letter-spacing: 0.02em;
+  opacity: 0; transform: translateY(8px); transition: opacity 1.2s ease, transform 1.2s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+#screen8a .line.reveal { opacity: 1; transform: translateY(0); }
+
+#screen8a .line.golden-climax { font-size: 2.3rem; font-weight: 600; color: #4A2810; transition: all 1.5s ease; }
+#screen8a .line.golden-climax.glow {
+  color: #B55800;
+  text-shadow: 0 0 25px rgba(255, 175, 70, 0.9), 0 0 45px rgba(255, 215, 130, 0.7);
+  transform: scale(1.06);
+}
+
+#screen8a .subtle-line { font-size: 1.65rem; line-height: 1.8; color: #5A3A28; font-style: italic; }
+
+#screen8a .completed-badge {
+  margin-top: 25px; font-family: 'Jost', sans-serif; font-size: 1.1rem; letter-spacing: 0.2em;
+  color: #2E5A36; font-weight: 500; text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.4); padding: 10px 22px; border-radius: 999px; display: inline-block;
+  backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#screen8a .final-chapter-content { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+#screen8a .chapter-title { font-size: 2.8rem; font-weight: 500; color: #4A2810; letter-spacing: 0.05em; }
+#screen8a .chapter-sub { font-size: 1.7rem; color: #6E4A32; font-style: italic; }
+#screen8a .chapter-highlight { font-size: 3.2rem; font-weight: 600; color: #B55800; letter-spacing: 0.08em; margin-top: 5px; text-shadow: 0 0 30px rgba(255, 180, 80, 0.6); }
+
+@media (max-width: 600px) {
+  #screen8a .line { font-size: 1.5rem; }
+  #screen8a .line.golden-climax { font-size: 1.9rem; }
+  #screen8a .subtle-line { font-size: 1.35rem; }
+  #screen8a .chapter-title { font-size: 2.2rem; }
+  #screen8a .chapter-highlight { font-size: 2.5rem; }
+}
