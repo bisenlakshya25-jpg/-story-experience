@@ -1,0 +1,145 @@
+/* ===== SCREEN 5 — What I Noticed ===== */
+#screen5 {
+  --bg-navy: #040612;
+  --bg-indigo: #090E24;
+  --bg-soft-blue: #161A36;
+  --accent-gold: #FFD075;
+  --ivory: #EAF0FF;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-navy);
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+#screen5 .bg-layer {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse 120% 80% at 50% 30%, var(--bg-soft-blue) 0%, var(--bg-indigo) 55%, var(--bg-navy) 100%);
+  transform: scale(1.05);
+  transition: transform 1200ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+#screen5 .bg-layer.zoomed { transform: scale(1.08); }
+
+#screen5 .aurora { position: absolute; border-radius: 50%; filter: blur(90px); mix-blend-mode: screen; }
+#screen5 .aurora-1 { width: 60vw; height: 50vw; top: -10%; left: -20%; background: radial-gradient(circle, #3344B8 0%, transparent 70%); opacity: 0.22; }
+#screen5 .aurora-dawn-gold {
+  width: 100vw; height: 45vw; bottom: -10%; left: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 208, 117, 0.18) 0%, rgba(255, 180, 80, 0.06) 55%, transparent 80%);
+  filter: blur(80px); opacity: 0.8; transition: opacity 1.5s ease;
+}
+
+#screen5 #s5-stars-canvas, #screen5 #s5-particles-canvas { position: absolute; inset: 0; pointer-events: none; }
+#screen5 #s5-stars-canvas.heartbeat { animation: s5starPulse 0.8s ease-in-out; }
+
+@keyframes s5starPulse { 0% { filter: brightness(1); } 50% { filter: brightness(1.7) drop-shadow(0 0 4px var(--ivory)); } 100% { filter: brightness(1); } }
+
+#screen5 .stage {
+  position: relative; width: 100%; height: 100%; z-index: 10;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+  padding: 50px 20px 40px 20px;
+}
+
+#screen5 .chapter-header {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+#screen5 .chapter-header.show { opacity: 0.85; transform: translateY(0); }
+#screen5 .chapter-header.slide-up { transform: translateY(-16px); }
+#screen5 .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ivory); }
+#screen5 .chapter-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.92rem; letter-spacing: 0.15em; color: rgba(234, 240, 255, 0.8); }
+
+#screen5 .card-stack-container {
+  position: relative; width: min(88%, 420px); height: 380px;
+  display: flex; justify-content: center; align-items: center;
+  margin-top: -10px; touch-action: pan-y;
+}
+
+#screen5 .stack-shadow {
+  position: absolute; width: 100%; height: 100%; border-radius: 28px;
+  background: rgba(245, 245, 245, 0.03); border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none; transition: all 0.8s ease; opacity: 0;
+}
+#screen5 .stack-shadow.show { opacity: 0.6; }
+#screen5 .stack-shadow.shadow-1 { transform: scale(0.96) translateY(12px); }
+#screen5 .stack-shadow.shadow-2 { transform: scale(0.92) translateY(24px); opacity: 0.3; }
+
+#screen5 .matte-card {
+  position: absolute; width: 100%; height: 100%; border-radius: 28px; padding: 30px 26px;
+  background: rgba(245, 245, 245, 0.05);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  opacity: 0; visibility: hidden; transform: scale(0.92) translateY(20px);
+  will-change: transform, opacity;
+  transition: border-color 0.8s ease, background 0.8s ease, transform 0.3s ease;
+}
+
+#screen5 .matte-card.slow-appear { visibility: visible; animation: s5slowEmerge 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes s5slowEmerge { 0% { opacity: 0; transform: scale(0.92) translateY(20px); filter: blur(6px); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0px); } }
+
+#screen5 .matte-card.land { visibility: visible; animation: s5softLand 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes s5softLand { 0% { opacity: 0; transform: scale(0.95) translateY(10px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+#screen5 .matte-card.slide-exit-next { animation: s5cardExitNext 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes s5cardExitNext { 0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; } 100% { transform: scale(0.96) translate(140px, -15px) rotate(3deg); opacity: 0; } }
+
+#screen5 .matte-card.slide-exit-prev { animation: s5cardExitPrev 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes s5cardExitPrev { 0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; } 100% { transform: scale(0.96) translate(-140px, -15px) rotate(-3deg); opacity: 0; } }
+
+#screen5 .matte-card.last-card-style {
+  transform: scale(1.05) !important;
+  background: linear-gradient(145deg, rgba(255, 208, 117, 0.09) 0%, rgba(20, 25, 48, 0.5) 100%);
+  border: 1px solid rgba(255, 208, 117, 0.4);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 208, 117, 0.15);
+}
+
+#screen5 .card-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; }
+
+#screen5 .crop-image-box {
+  width: 110px; height: 110px; border-radius: 50%; overflow: hidden;
+  border: 2px solid rgba(255, 208, 117, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 8px; opacity: 0; transform: scale(0.9);
+  transition: opacity 1s ease, transform 1s ease;
+}
+#screen5 .crop-image-box img { width: 100%; height: 100%; object-fit: cover; }
+#screen5 .crop-image-box.show { opacity: 1; transform: scale(1); }
+
+#screen5 .card-heading { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ivory); opacity: 0; filter: blur(4px); transition: opacity 1s ease, filter 1s ease; }
+#screen5 .card-subtext { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: rgba(234, 240, 255, 0.82); line-height: 1.45; opacity: 0; filter: blur(4px); transition: opacity 1s ease, filter 1s ease; }
+#screen5 .show-element { opacity: 1 !important; filter: blur(0px) !important; }
+#screen5 .dynamic-line { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ivory); opacity: 0; transition: opacity 0.5s ease; }
+
+#screen5 .footer-bar { width: min(88%, 420px); display: flex; align-items: center; justify-content: space-between; opacity: 0; transition: opacity 1s ease; }
+#screen5 .footer-bar.show { opacity: 1; }
+#screen5 .progress-dots { display: flex; align-items: center; gap: 8px; }
+#screen5 .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); transition: all 0.4s ease; }
+#screen5 .dot.active { background: var(--accent-gold); transform: scale(1.3); box-shadow: 0 0 10px rgba(255, 208, 117, 0.6); }
+
+#screen5 .skip-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.04);
+  color: rgba(234, 240, 255, 0.7); font-family: 'Jost', sans-serif; font-size: 0.75rem;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+}
+#screen5 .skip-btn:hover { background: rgba(255, 208, 117, 0.12); border-color: rgba(255, 208, 117, 0.4); color: var(--ivory); }
+
+#screen5 .last-continue-btn {
+  padding: 10px 28px; border-radius: 999px; border: 1px solid rgba(255, 208, 117, 0.4);
+  background: rgba(255, 208, 117, 0.12); color: var(--ivory); font-family: 'Jost', sans-serif;
+  font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+}
+#screen5 .last-continue-btn:hover { box-shadow: 0 0 20px rgba(255, 208, 117, 0.4); transform: translateY(-1px); }
+
+@media (min-width: 768px) {
+  #screen5 .card-stack-container { height: 420px; }
+  #screen5 .card-heading { font-size: 2.1rem; }
+  #screen5 .card-subtext { font-size: 1.4rem; }
+}
