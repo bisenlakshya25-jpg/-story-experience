@@ -1,0 +1,93 @@
+/* ===== SCREEN 3 — Chapter One ===== */
+#screen3 {
+  --bg-navy: #040612;
+  --bg-indigo: #090E24;
+  --bg-soft-blue: #161A36;
+  --accent-gold: #FFD075;
+  --ivory: #EAF0FF;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-navy);
+  overflow: hidden;
+}
+
+#screen3 .bg-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  background: radial-gradient(ellipse 120% 80% at 50% 30%, var(--bg-soft-blue) 0%, var(--bg-indigo) 55%, var(--bg-navy) 100%);
+  transform: scale(1.02);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+#screen3 .bg-layer.scaled { transform: scale(1.05); }
+
+#screen3 .aurora { position: absolute; border-radius: 50%; filter: blur(100px); mix-blend-mode: screen; }
+#screen3 .aurora-1 { width: 60vw; height: 50vw; top: -10%; left: -20%; background: radial-gradient(circle, #3344B8 0%, transparent 70%); opacity: 0.22; animation: s3horizonDrift 32s ease-in-out infinite alternate; }
+#screen3 .aurora-2 { width: 50vw; height: 50vw; top: 15%; right: -20%; background: radial-gradient(circle, #6A3BB5 0%, transparent 70%); opacity: 0.18; animation: s3horizonDrift 28s ease-in-out infinite alternate-reverse; }
+#screen3 .aurora-horizon-dawn {
+  width: 120vw; height: 40vw; bottom: -15%; left: -10%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 208, 117, 0.16) 0%, rgba(255, 180, 80, 0.05) 50%, transparent 80%);
+  filter: blur(90px);
+  animation: s3horizonGlowDrift 24s ease-in-out infinite alternate;
+}
+
+@keyframes s3horizonDrift { 0% { transform: translateX(0px) scale(1); } 100% { transform: translateX(80px) scale(1.06); } }
+@keyframes s3horizonGlowDrift { 0% { transform: translateX(-40px) translateY(0); } 100% { transform: translateX(40px) translateY(-10px); } }
+
+#screen3 #s3-stars-canvas, #screen3 #s3-fireflies-canvas { position: absolute; inset: 0; pointer-events: none; }
+
+#screen3 .stage-container {
+  position: relative;
+  width: 100%; height: 100%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 24px 100px 24px;
+}
+
+#screen3 .chapter-header {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; transform: translateY(-10px);
+  transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+}
+#screen3 .chapter-header.show { opacity: 0.9; transform: translateY(0); }
+#screen3 .chapter-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ivory); font-weight: 500; }
+#screen3 .chapter-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; letter-spacing: 0.18em; color: rgba(234, 240, 255, 0.85); }
+
+#screen3 .center-content { display: flex; flex-direction: column; align-items: center; gap: 28px; margin-bottom: 20vh; }
+
+#screen3 .ready-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; letter-spacing: 0.05em; color: var(--ivory);
+  opacity: 0; filter: blur(8px); transform: translateY(10px);
+  transition: opacity 1.5s ease-out, filter 1.5s ease-out, transform 1.5s ease-out;
+}
+#screen3 .ready-text.show { opacity: 0.95; filter: blur(0px); transform: translateY(0); }
+
+#screen3 .action-wrapper { opacity: 0; filter: blur(6px); transform: translateY(12px); transition: opacity 1.2s ease-out, filter 1.2s ease-out, transform 1.2s ease-out; }
+#screen3 .action-wrapper.show { opacity: 1; filter: blur(0px); transform: translateY(0); }
+
+#screen3 .begin-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 36px; border-radius: 999px;
+  border: 1px solid rgba(255, 208, 117, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  color: var(--ivory); font-family: 'Jost', sans-serif; font-size: 0.95rem;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.4s ease; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+#screen3 .begin-cta .arrow-icon { width: 18px; height: 18px; transition: transform 0.3s ease; }
+#screen3 .begin-cta:hover { background: rgba(255, 208, 117, 0.14); border-color: rgba(255, 208, 117, 0.65); box-shadow: 0 0 25px rgba(255, 208, 117, 0.38); }
+#screen3 .begin-cta:hover .arrow-icon { transform: translateX(4px); }
+
+@media (min-width: 768px) {
+  #screen3 .chapter-title { font-size: 1.4rem; }
+  #screen3 .chapter-subtitle { font-size: 1.15rem; }
+  #screen3 .ready-text { font-size: 2.8rem; }
+}
