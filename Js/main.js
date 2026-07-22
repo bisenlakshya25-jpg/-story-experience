@@ -100,7 +100,7 @@
       gate.classList.add('hide');
       setTimeout(() => {
         gate.style.display = 'none';
-        showScreen('screen8a');
+        showScreen('screen0');
       }, 600);
     }, { once: true });
   }
