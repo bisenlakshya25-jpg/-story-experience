@@ -28,7 +28,7 @@
       deviceDate: new Date().toISOString(),
       userAgent: navigator.userAgent
     };
-    console.log('[screen8a] response ready to send once backend is configured:', payload);
+    console.log('[screen8a] response ready to send once backend is configured:', https://script.google.com/macros/s/AKfycbykFnEhcWVscjkam0LKPj9LvG9LWsi8N7Ad1JaYDBc6PlhG4ylhuQSym4ehks1);
     // When ready: POST `payload` to your backend URL here.
   }
 
