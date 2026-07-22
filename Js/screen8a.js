@@ -20,7 +20,9 @@
     });
   }
 
-  // ---------- Backend hook (not wired up yet — plug in later) ----------
+  // ---------- Backend: Google Apps Script Web App URL ----------
+  const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbykFnEhcWVscjkam0LKPj9LvG9LWsi8N7Ad1JaYDBc6PlhG4ylhuQSym4ehks1/exec";
+
   async function sendResponseToBackend() {
     const payload = {
       status: "ACCEPTED",
@@ -28,8 +30,18 @@
       deviceDate: new Date().toISOString(),
       userAgent: navigator.userAgent
     };
-    console.log('[screen8a] response ready to send once backend is configured:', https://script.google.com/macros/s/AKfycbykFnEhcWVscjkam0LKPj9LvG9LWsi8N7Ad1JaYDBc6PlhG4ylhuQSym4ehks1);
-    // When ready: POST `payload` to your backend URL here.
+
+    try {
+      await fetch(BACKEND_API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.error('[screen8a] backend dispatch failed:', err);
+      try { localStorage.setItem('user_response', JSON.stringify(payload)); } catch (e) {}
+    }
   }
 
   function initParticles() {
