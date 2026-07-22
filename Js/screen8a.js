@@ -21,7 +21,7 @@
   }
 
   // ---------- Backend: Google Apps Script Web App URL ----------
-  const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbykFnEhcWVscjkam0LKPj9LvG9LWsi8N7Ad1JaYDBc6PlhG4ylhuQSym4ehks1/exec";
+  const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbykFnEhcWVscjkam0LKPj9LvG9LWsi8N7Ad1JaYDBc6PlhG4yIhuQSym4ehks1I_giZ/exec";
 
   async function sendResponseToBackend() {
     const payload = {
