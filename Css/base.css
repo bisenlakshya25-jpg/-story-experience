@@ -26,10 +26,10 @@ html, body {
   inset: 0;
   width: 100%;
   height: 100%;
-  display: none; /* controller.js flips this to 'block' */
+  display: none !important; /* !important beats any #screenN{display:flex} rule */
 }
 
-.screen-wrap.active { display: block; }
+.screen-wrap.active { display: flex !important; }
 
 /* ---------------- Loader (shows while assets/fonts preload) ---------------- */
 #loader-screen {
