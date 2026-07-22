@@ -34,8 +34,7 @@
     try {
       await fetch(BACKEND_API_URL, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        
         body: JSON.stringify(payload)
       });
     } catch (err) {
